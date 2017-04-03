@@ -8,10 +8,11 @@ joystick::joystick(int PowerPin, int VRXpin, int VRYpin, int SWpin) : powerPin(P
 
 	pinMode(powerPin, OUTPUT);
 	pinMode(swPin, INPUT);
+	digitalWrite(powerPin, HIGH);
 }
 
 int joystick::createAnalogWriteValue(int readPin) {
 	int readValue = analogRead(readPin);
-	map(readValue, 0, 1023, 0, 255);
+	readValue = map(readValue, 0, 1023, 0, 255);
 	return readValue;
 }
