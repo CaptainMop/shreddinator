@@ -15,7 +15,7 @@ Motor::Motor(int PWMPin, int forwardPin, int backwardsPin) : PWMPin(PWMPin), Dir
 }
 
 void Motor::setMotorGain(int analogWriteValue){
-	if (analogWriteValue > PWMStopValue + PWMStopTreshold) {
+	if (analogWriteValue > (PWMStopValue + PWMStopTreshold)) {
 		setMotorDir(forward);
 
 		if (analogWriteValue > maxPWMValue) {
@@ -26,7 +26,7 @@ void Motor::setMotorGain(int analogWriteValue){
 		}
 	
 	}
-	else if (analogWriteValue < PWMStopValue - PWMStopTreshold) {
+	else if (analogWriteValue < (PWMStopValue - PWMStopTreshold)) {
 		setMotorDir(backwards);
 
 		if (analogWriteValue < minPWMValue) {
@@ -73,6 +73,10 @@ float getYawValueRight(int analogReadValueX) {
 
 
 void conntrolSpeed(Motor &motorRight, Motor &motorLeft, int analogReadValueY, int analogReadValueX) {
-	motorRight.setMotorGain(analogReadValueY * getYawValueRight(analogReadValueX));
-	motorLeft.setMotorGain(analogReadValueY * getYawValueLeft(analogReadValueX));
+	Serial.println("\n analogReadValueX:");
+	Serial.println(analogReadValueX);
+	Serial.println("\n analogReadValueY:");
+	Serial.println(analogReadValueY);
+	motorRight.setMotorGain(analogReadValueY); //* getYawValueRight(analogReadValueX));
+	motorLeft.setMotorGain(analogReadValueY); //* getYawValueLeft(analogReadValueX));
 }
