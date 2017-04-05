@@ -73,11 +73,6 @@ float getYawValueRight(int analogReadValueX) {
 
 
 void conntrolSpeed(Motor &motorRight, Motor &motorLeft, int analogReadValueY, int analogReadValueX) {
-	Serial.print("\n analogReadValueX:");
-	Serial.println(analogReadValueX);
-	Serial.print("\n analogReadValueY:");
-	Serial.println(analogReadValueY);
 	motorRight.setMotorGain(analogReadValueY * getYawValueRight(analogReadValueX));
 	motorLeft.setMotorGain(analogReadValueY * getYawValueLeft(analogReadValueX));
-	//delay(1000);
 }

@@ -7,11 +7,17 @@
 #include "MotorDriver.h"
 #include "joyStick.h"
 
-//joystick
-#define POWERPin 12
-#define VRXPin 0
-#define VRYPin 2
-#define SWPin 11
+//joystickRight
+#define POWERPinRight 3
+#define VRXPinRight 1
+#define VRYPinRight 2
+#define SWPinRight 13
+
+//joystickLeft
+#define POWERPinLeft 4
+#define VRXPinLeft 1
+#define VRYPinLeft 0
+#define SWPinLeft 13
 
 //Right motor
 #define PWMPinLeft 5
@@ -23,7 +29,8 @@
 #define fowardPinRight 9
 #define backwardsPinRight 10
 
-joystick joy(POWERPin, VRXPin, VRYPin, SWPin);
+joystick joyLeft(POWERPinLeft, VRXPinLeft, VRYPinLeft, SWPinLeft);
+joystick joyRight(POWERPinRight, VRXPinRight, VRYPinRight, SWPinRight);
 Motor motorRight(PWMPinRight, fowardPinRight, backwardsPinRight);
 Motor motorLeft(PWMPinLeft, fowardPinLeft, backwardsPinLeft);
 // the setup function runs once when you press reset or power the board
@@ -33,5 +40,6 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-	conntrolSpeed(motorRight, motorLeft, joy.createAnalogWriteValueY(), joy.createAnalogWriteValueX());
+	motorLeft.setMotorGain(joyLeft.createAnalogWriteValueY());
+	motorRight.setMotorGain(joyRight.createAnalogWriteValueY());
 }
